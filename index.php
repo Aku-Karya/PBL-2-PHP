@@ -1,26 +1,19 @@
 <?php include 'db.php'; ?>
-<!--
-  index.php — READ (the "R" in CRUD)
-  Lists every student from the database in a table.
-  The line above runs db.php first, so $conn (our database
-  connection) already exists and is ready to use here.
--->
-<h2>Student List</h2>
+<?php include 'header.php'; ?>
+
+<h2>Patience Data</h2>
 
 <!-- A link (the <a> "anchor" tag). Clicking it opens the add-student page. -->
-<a href="add.php">Add New Student</a>
+<a href="add.php">Add New Patient</a>
 
 <!-- Start an HTML table. border="1" draws the grid lines; cellpadding adds spacing inside each cell. -->
 <table border="1" cellpadding="10">
 <tr>
   <!-- <tr> = table row.  <th> = a bold header cell (table heading). -->
-  <th>ID</th><th>Name</th><th>Email</th><th>Course</th><th>Action</th>
+  <th>ID</th><th>Name</th><th>Email</th><th>Phone Number</th><th>Gender</th>
 </tr>
 <?php
-// $conn->query(...) sends an SQL command to the database and returns the result.
-// "SELECT * FROM students" means: fetch ALL columns (*) of every row in the "students" table.
 $result = $conn->query("SELECT * FROM users");
-
 // A "while" loop repeats its block once for each row that comes back.
 // $result->fetch_assoc() returns the NEXT row as an "associative array"
 // (an array whose values are read by column name, e.g. $row['name']).
@@ -35,8 +28,8 @@ while($row = $result->fetch_assoc()) {
     <td>".$row['phone_number']."</td>
     <td>".$row['gender']."</td>
     <td>
-      <a href='edit.php?id=".$row['id']."'>Edit</a> |
-      <a href='delete.php?id=".$row['id']."'>Delete</a>
+      <a href='edit_user.php?id=".$row['id']."'>Edit</a> |
+      <a href='delete_user.php?id=".$row['id']."'>Delete</a>
     </td>
   </tr>";
   // Note: edit.php?id=...  and  delete.php?id=...  put the student's id into the
@@ -44,3 +37,36 @@ while($row = $result->fetch_assoc()) {
 }
 ?>
 </table>
+
+<h2>Services Data</h2>
+
+<!-- A link (the <a> "anchor" tag). Clicking it opens the add-student page. -->
+<a href="add.php">Add New Service</a>
+
+<!-- Start an HTML table. border="1" draws the grid lines; cellpadding adds spacing inside each cell. -->
+<table border="1" cellpadding="10">
+<tr>
+  <!-- <tr> = table row.  <th> = a bold header cell (table heading). -->
+  <th>ID</th><th>Name</th><th>Fee</th><th>Description</th><th>User</th>
+</tr>
+<?php
+$result = $conn->query("SELECT * FROM services");
+ 
+while($row = $result->fetch_assoc()) {
+ 
+  echo "<tr>
+    <td>".$row['id']."</td>
+    <td>".$row['name']."</td>
+    <td>".$row['fee']."</td>
+    <td>".$row['description']."</td>
+    <td>".$row['user']."</td>
+    <td>
+      <a href='edit_service.php?id=".$row['id']."'>Edit</a> |
+      <a href='delete_service.php?id=".$row['id']."'>Delete</a>
+    </td>
+  </tr>";
+}
+?>
+</table>
+
+<?php include 'footer.php'; ?>
