@@ -1,4 +1,5 @@
 <?php include 'db.php'; ?>
+<?php include 'header.php'; ?>
 <!--
   add.php — CREATE (the "C" in CRUD)
   Shows a form to type a new student, then saves it into the database.
@@ -14,7 +15,7 @@
   Name: <input type="text" name="name"><br>
   ID: <input type="text" name="id"><br>
   Email: <input type="email" name="email"><br>
-  Course: <input type="text" name="phone_number"><br>
+  Phone Number: <input type="text" name="phone_number"><br>
   Gender: <input type="text" name="gender"><br>
   <!-- The submit button. Clicking it sends the form. name="save" lets PHP tell that THIS button was pressed. -->
   <input type="submit" name="save" value="Save">
@@ -41,3 +42,5 @@ if(isset($_POST['save'])){
   header("Location: index.php");
 }
 ?>
+
+<?php include 'footer.php'; ?>
